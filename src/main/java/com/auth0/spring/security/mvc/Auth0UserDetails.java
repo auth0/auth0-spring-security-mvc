@@ -27,6 +27,7 @@ public class Auth0UserDetails implements UserDetails {
     private Map<String, Object> extraInfo;
     private List<UserIdentity> identities;
     private ArrayList<GrantedAuthority> authorities;
+    private Map<String, Object> userMetadata;
 
     public Auth0UserDetails(final Auth0User auth0User, final Auth0AuthorityStrategy authorityStrategy) {
         this.userId = auth0User.getUserId();
@@ -46,6 +47,7 @@ public class Auth0UserDetails implements UserDetails {
         this.picture = auth0User.getPicture();
         this.identities = auth0User.getIdentities();
         this.extraInfo = auth0User.getExtraInfo();
+        this.userMetadata = auth0User.getUserMetadata();
         setupGrantedAuthorities(auth0User, authorityStrategy);
     }
 
@@ -78,6 +80,14 @@ public class Auth0UserDetails implements UserDetails {
         } else if (Auth0AuthorityStrategy.SCOPE.equals(authorityStrategy)) {
             throw new IllegalStateException("SCOPE authority strategy not supported for MVC apps");
         }
+    }
+    
+    public Map<String, Object> getUserMetadata() {
+        return userMetadata;
+    }
+
+    public Map<String, Object> getExtraInfo() {
+        return extraInfo;
     }
 
     public String getName() {
@@ -114,7 +124,7 @@ public class Auth0UserDetails implements UserDetails {
      */
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Password is protected");
+        throw null;
     }
 
     /**
@@ -134,7 +144,7 @@ public class Auth0UserDetails implements UserDetails {
      */
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     /**
@@ -145,7 +155,7 @@ public class Auth0UserDetails implements UserDetails {
      */
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     /**
@@ -157,7 +167,7 @@ public class Auth0UserDetails implements UserDetails {
      */
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     /**
