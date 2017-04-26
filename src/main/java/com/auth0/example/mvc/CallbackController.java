@@ -1,5 +1,6 @@
-package com.auth0.example;
+package com.auth0.example.mvc;
 
+import com.auth0.AuthenticationController;
 import com.auth0.IdentityVerificationException;
 import com.auth0.SessionUtils;
 import com.auth0.Tokens;
@@ -19,7 +20,7 @@ import java.io.IOException;
 public class CallbackController {
 
     @Autowired
-    private AuthController controller;
+    private AuthenticationController controller;
     private final String redirectOnFail;
     private final String redirectOnSuccess;
 

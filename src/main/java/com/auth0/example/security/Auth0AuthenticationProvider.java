@@ -1,4 +1,4 @@
-package com.auth0.example;
+package com.auth0.example.security;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -6,6 +6,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("unused")
 @Component
 public class Auth0AuthenticationProvider implements AuthenticationProvider {
 
@@ -16,14 +17,8 @@ public class Auth0AuthenticationProvider implements AuthenticationProvider {
         if (existingAuthentication != null && existingAuthentication.isAuthenticated()) {
             return existingAuthentication;
         }
-
-        //Use new authentication
-        TokenAuthentication tokenAuth = (TokenAuthentication) authentication;
-        tokenAuth.setAuthenticated(true);
-//        final ServletRequestAttributes servletReqAttr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//        final HttpServletRequest req = servletReqAttr.getRequest();
-        //FIXME: Tokens should be already verified (by the com.auth0.example.CallbackController)
-        return tokenAuth;
+        //Return the new one
+        return authentication;
     }
 
     @Override

@@ -58,7 +58,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $.growl({title: "Welcome  ${userId}", message: "We hope you enjoy using this site!"});
+        $.growl({title: "Welcome ${userId}", message: "We hope you enjoy using this site!"});
     });
     $("#logout").click(function(e) {
         e.preventDefault();

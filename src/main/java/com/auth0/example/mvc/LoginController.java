@@ -1,5 +1,6 @@
-package com.auth0.example;
+package com.auth0.example.mvc;
 
+import com.auth0.AuthenticationController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
 
     @Autowired
-    private AuthController controller;
+    private AuthenticationController controller;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
