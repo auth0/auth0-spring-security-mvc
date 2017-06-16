@@ -9,7 +9,7 @@
 
     <groupId>com.auth0</groupId>
     <artifactId>auth0-spring-security-mvc</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1-SNAPSHOT</version>
     <name>auth0-spring-security-mvc</name>
     <description>Integrates Auth0 with Spring Boot and Spring Security for java spring server-side MVC web apps</description>
     <url>http://auth0.com</url>
