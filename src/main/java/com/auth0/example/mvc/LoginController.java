@@ -1,6 +1,7 @@
 package com.auth0.example.mvc;
 
 import com.auth0.AuthenticationController;
+import com.auth0.AuthorizeUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class LoginController {
     protected String login(final HttpServletRequest req) {
         logger.debug("Performing login");
         String redirectUri = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/callback";
-        String authorizeUrl = controller.buildAuthorizeUrl(req, redirectUri);
-        return "redirect:" + authorizeUrl;
+        AuthorizeUrl authorizeUrl = controller.buildAuthorizeUrl(req, redirectUri);
+        return "redirect:" + authorizeUrl.build();
     }
 
 }

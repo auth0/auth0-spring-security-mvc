@@ -2,10 +2,13 @@ package com.auth0.example.mvc;
 
 import com.auth0.AuthenticationController;
 import com.auth0.IdentityVerificationException;
-import com.auth0.SessionUtils;
 import com.auth0.Tokens;
+import com.auth0.example.security.TokenAuthentication;
+import com.auth0.jwt.JWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,11 +45,12 @@ public class CallbackController {
     private void handle(HttpServletRequest req, HttpServletResponse res) throws IOException {
         try {
             Tokens tokens = controller.handle(req);
-            SessionUtils.set(req, "accessToken", tokens.getAccessToken());
-            SessionUtils.set(req, "idToken", tokens.getIdToken());
+            TokenAuthentication tokenAuth = new TokenAuthentication(JWT.decode(tokens.getIdToken()));
+            SecurityContextHolder.getContext().setAuthentication(tokenAuth);
             res.sendRedirect(redirectOnSuccess);
-        } catch (IdentityVerificationException e) {
+        } catch (AuthenticationException | IdentityVerificationException e) {
             e.printStackTrace();
+            SecurityContextHolder.clearContext();
             res.sendRedirect(redirectOnFail);
         }
     }

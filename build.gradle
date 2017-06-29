@@ -19,12 +19,11 @@ buildscript {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    compile 'com.auth0:mvc-auth-commons:0.0.1-SNAPSHOT'
+    compile 'com.auth0:mvc-auth-commons:1.0.0'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-security'
 
